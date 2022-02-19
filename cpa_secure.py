@@ -9,7 +9,6 @@ class CPA:
 
     def key_gen(self, n):
         g = PRG()
-        # print(432)
         g.init_val(format(432,'b'))
         return g.gen_n_bit(n)
 
