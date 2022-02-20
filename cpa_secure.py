@@ -35,10 +35,15 @@ class CPA:
 
 if __name__ == "__main__":
     cpa = CPA()
-    # print()
+
     k = cpa.key_gen(7)
     print(message_encoder("Hello World"))
     print(cpa.encrypt(message_encoder("Hello World"),k))
     print(cpa.decrypt(cpa.encrypt(message_encoder("Hello World"),cpa.key_gen(7)),k))
     print(message_decoder(cpa.decrypt(cpa.encrypt(message_encoder("Hello World"),cpa.key_gen(7)),k)))
 
+    k = cpa.key_gen(10)
+    print(int(k,2), k)
+    msg = [format(i, 'b').zfill(10) for i in range(800, 810)]
+    print(cpa.encrypt(msg, k))
+    print(cpa.decrypt(cpa.encrypt(msg, k), k))
