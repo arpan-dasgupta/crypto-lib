@@ -32,23 +32,23 @@ class PRG:
     def __init__(self, type=1):
         self.val = "11" # Initial Value
         self.type = 1
+        self.output = ""
 
     def init_val(self, val):
         self.val = val
+        self.output = ""
 
     def add_bit(self, bit):
-        self.val = self.val + str(bit)
-        return self.val
+        self.output = self.output + str(bit)
+        return self.output
 
     def gen_n_bit(self, n):
         f = OneWayFunc(type=self.type)
         for i in range(n):
-            # print(int(self.val, 2))
             x = f.evaluate(int(self.val, 2))
             self.add_bit(f.hardcore_pred(x))
-            # print(x, f.hardcore_pred(x), self.val)
-        return self.val[-n:]
-
+            self.val = format(x, 'b')
+        return self.output
 
 if __name__=="__main__":
     # f = OneWayFunc(type=1)
@@ -56,8 +56,13 @@ if __name__=="__main__":
     #     x = f.evaluate(r.val)
     #     r.add_bit(f.hardcore_pred(x))
     #     print(x, f.hardcore_pred(x), r.val)
+
     r = PRG()
-    print(r.gen_n_bit(20))
+    for i in range(1, 5):
+        # print(format(i, 'b').zfill(10), end=' ')
+        r.init_val(format(i, 'b').zfill(10))
+        print(r.gen_n_bit(10))
+
     # dl = DiscreteLog()
     # for i in range(10):
     #     print(dl.evaluate(i))
