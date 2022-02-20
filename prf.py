@@ -10,6 +10,7 @@ class PRF:
         for bit in val:
             self.prg.init_val(z)
             x = self.prg.gen_n_bit(2*len(key))
+            # print(x, end=' ')
             if bit == '0':
                 z = x[:len(key)]
             else:
@@ -18,6 +19,8 @@ class PRF:
 
 if __name__ == "__main__":
     f = PRF()
-    k = '0110'
-    v = '1101'
-    print(f.func(k, v))
+    k = '0110010110'
+    v = '1100110010'
+    for i in range(800, 810):
+        v = format(i, 'b').zfill(10)
+        print(f.func(k, v))
