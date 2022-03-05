@@ -1,4 +1,4 @@
-from merkle_damgard.merkel_damgard import MerkleDamgard
+from merkle_damgard.merkle_damgard import MerkleDamgard
 from fixed_len_hash.fixed_length_hash_func import FixedLenHash
 from cpa_secure.cpa_secure import *
 from copy import deepcopy
