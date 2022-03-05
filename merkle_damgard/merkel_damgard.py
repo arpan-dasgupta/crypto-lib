@@ -1,4 +1,4 @@
-from fixed_length_hash_func import FixedLenHash
+from fixed_len_hash.fixed_length_hash_func import FixedLenHash
 from message_encoder import message_encoder
 
 class MerkleDamgard:

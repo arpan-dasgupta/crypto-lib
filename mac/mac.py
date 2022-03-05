@@ -1,4 +1,4 @@
-from cpa_secure import *
+from cpa_secure.cpa_secure import *
 
 class CBC_MAC:
     def __init__(self, type = 1):

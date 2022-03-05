@@ -1,4 +1,4 @@
-from mac import *
+from mac.mac import *
 
 class CCA:
 

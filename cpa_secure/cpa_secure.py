@@ -1,4 +1,4 @@
-from prf import *
+from prf.prf import *
 from message_encoder import *
 
 from datetime import datetime

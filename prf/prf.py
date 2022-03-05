@@ -1,4 +1,4 @@
-from prg import *
+from prg.prg import *
 
 class PRF:
     def __init__(self, type=1):
