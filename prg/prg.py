@@ -1,14 +1,26 @@
 class DiscreteLog:
+    """
+    Class for performing dicrete log computation and finding the hardcore predicate.
+    """
     def __init__(self):
+        """
+        Initialize prime and generator
+        """
         self.p = 1000000007
         self.g = 67849
 
     def evaluate(self, val):
+        """
+        Performs the discrete log computation for the assigned prime and generator
+        """
         g = self.g
         p = self.p
         return pow(g, val, p) 
 
     def hardcore_pred(self, val):
+        """
+        Returns the hardcore predicate given the output of dicrete log (The MSB)
+        """
         g = self.g
         p = self.p
         if val>p/2:
@@ -17,32 +29,58 @@ class DiscreteLog:
             return 0
 
 class OneWayFunc:
+    """
+    General function adaptible to any one way function or permutation to be added in the future
+    """
     def __init__(self, type=1):
+        """
+        Initialize type of one way function used
+        """
         if type==1:
             self.ow_func = DiscreteLog()
 
     def evaluate(self, val):
+        """
+        Compute the one way function
+        """
         return self.ow_func.evaluate(val)
     
     def hardcore_pred(self, val):
+        """
+        Return the hardcore predicate given the output
+        """
         return self.ow_func.hardcore_pred(val)
 
 class PRG:
-
+    """
+    Class for generating a n-bit pseudo random number
+    """
     def __init__(self, type=1):
+        """
+        Initialize initial value and the type of one-way function
+        """
         self.val = "11" # Initial Value
         self.type = 1
         self.output = ""
 
     def init_val(self, val):
+        """
+        Initialize the value of the PRG using some seed
+        """
         self.val = val
         self.output = ""
 
     def add_bit(self, bit):
+        """
+        Internal function for genrating an extra bit of the prg
+        """
         self.output = self.output + str(bit)
         return self.output
 
     def gen_n_bit(self, n):
+        """
+        Generate a random n-bit (pseudo)random number using the one way function and return it.
+        """
         f = OneWayFunc(type=self.type)
         for i in range(n):
             x = f.evaluate(int(self.val, 2))

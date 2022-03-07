@@ -1,5 +1,12 @@
 class FixedLenHash:
+    """
+    Class for performing the hash of a fixed size input using the dicrete log method.
+    Maps from n * n bits to n bits.
+    """
     def __init__(self) -> None:
+        """
+        Initialize the primes and the generators.
+        """
         # self.q = 1000000007
         # self.g = 58756776
         # self.h = 43245436
@@ -8,6 +15,9 @@ class FixedLenHash:
         self.h = 71
     
     def compute(self, x1, x2):
+        """
+        Return n-bit sized hash of two n-bit input strings.
+        """
         return format((pow(self.g, int(x1,2), self.q)*pow(self.h, int(x2,2), self.q))%self.q,'b').zfill(len(x1))
 
 

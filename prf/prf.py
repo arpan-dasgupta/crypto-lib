@@ -1,11 +1,20 @@
 from prg.prg import *
 
 class PRF:
+    """
+    Class for pseudo random function. Function which maps input to a random number given a key.
+    """
     def __init__(self, type=1):
+        """
+        Initialize type of one-way function to be used
+        """
         if type==1:
             self.prg = PRG(type=1)
     
     def func(self, key, val):
+        """
+        Given the key and the input to the function a same sized random number is output by the function.
+        """
         z = key
         for bit in val:
             self.prg.init_val(z)

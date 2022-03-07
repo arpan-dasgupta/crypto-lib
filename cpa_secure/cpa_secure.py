@@ -4,15 +4,27 @@ from message_encoder import *
 from datetime import datetime
 
 class CPA:
+    """
+    Complete class for performing the complete procedure from key generation, 
+    encryption and decryption for a cpa-secure communication. The previously defined
+    prg and prf classes are used. CPA-secure implies that an adversary with access to 
+    encryption server cannot break the encryption scheme.
+    """
     def __init__(self):
         pass
 
     def key_gen(self, n):
+        """
+        Generate an n-bit key for performing communication using PRG.
+        """
         g = PRG()
         g.init_val(format(432,'b'))
         return g.gen_n_bit(n)
 
     def encrypt(self, message, key):
+        """
+        Given a message and a key, return the encrypted cipher text.
+        """
         g = PRG()
         f = PRF()
         m = []
@@ -26,6 +38,9 @@ class CPA:
         return m
 
     def decrypt(self, cipher, key):
+        """
+        Given a ciphertext and the key, generate the message which was encrypted.
+        """
         m = []
         for c in cipher:
             f = PRF()

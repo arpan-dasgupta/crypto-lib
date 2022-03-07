@@ -4,15 +4,30 @@ from cpa_secure.cpa_secure import *
 from copy import deepcopy
 
 class H_MAC:
+    """
+    Class for making a hash based MAC for genrating a tag in CCA-secure 
+    encryption schemes. These are faster than the CBC MAC.
+    """
     def __init__(self, type = 1):
+        """
+        Initialize the type of the one way function.
+        """
         self.prf = PRF(type=1)
 
     def key_gen(self, n):
+        """
+        Generate an n-bit key for performing MAC using PRG.
+        """
         g = PRG()
         g.init_val(format(432,'b'))
         return g.gen_n_bit(n)
 
     def mac(self, message, key):
+        """
+        Genrate a tag for a given message and a key. The tag is a fixed length value 
+        genrated by taking the hash in two stps using the previously defined MerkleDamgard
+        function.
+        """
         md = MerkleDamgard()
         ipad = "0110110"
         opad = "1011100"
@@ -27,6 +42,9 @@ class H_MAC:
         return ans
     
     def verify(self, message, key, tag):
+        """
+        Verify if the message and the tag generated match up.
+        """
         md = MerkleDamgard()
         ipad = "0110110"
         opad = "1011100"

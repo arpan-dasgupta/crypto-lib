@@ -1,11 +1,19 @@
 from mac.mac import *
 
 class CCA:
-
+    """
+    Complete class for performing the complete procedure from key generation, 
+    encryption and decryption for a cpa-secure communication. The previously defined
+    MAC, PRG and PRF classes are used. CCA-secure implies that an adversary with access to 
+    encryption server and the decryption server cannot break the encryption scheme.
+    """
     def __init__(self, type=1):
         self.type = type
 
     def key_gen(self, n):
+        """
+        Generate an n-bit key for performing communication using PRG.
+        """
         g = PRG(type = self.type)
         g.init_val(format(432,'b'))
 
@@ -14,6 +22,9 @@ class CCA:
         return (g.gen_n_bit(n), mac.key_gen(n))
 
     def encrypt(self, message, key):
+        """
+        Given a message and a key, return the encrypted cipher text (along with the tag).
+        """
         g = PRG(type=self.type)
         f = PRF(type=self.type)
         mac = CBC_MAC(type=self.type)
@@ -29,6 +40,10 @@ class CCA:
         return (m, mac.mac(message, key_2))
 
     def decrypt(self, cipher, key):
+        """
+        Given a ciphertext and the key, generate the message which was encrypted. Also 
+        verify if the message and the tag match.
+        """
         key_1, key_2 = key
         m = []
         for c in cipher[0]:
