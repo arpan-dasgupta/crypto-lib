@@ -6,8 +6,10 @@ class DiscreteLog:
         """
         Initialize prime and generator
         """
-        self.p = 1000000007
-        self.g = 67849
+        self.p = 37975227936943673922808872755445627854565536638199
+        self.g = 17075227936943673922808872755445627854565536638199
+        # self.p = 1000000007
+        # self.g = 67849
 
     def evaluate(self, val):
         """
@@ -84,7 +86,7 @@ class PRG:
         f = OneWayFunc(type=self.type)
         for i in range(n):
             x = f.evaluate(int(self.val, 2))
-            self.add_bit(f.hardcore_pred(x))
+            self.add_bit(f.hardcore_pred(int(self.val,2)))
             self.val = format(x, 'b')
         return self.output
 
