@@ -29,8 +29,8 @@ class H_MAC:
         function.
         """
         md = MerkleDamgard()
-        ipad = "0110110"
-        opad = "1011100"
+        opad = "0110110"
+        ipad = "1011100"
         ki = format(int(ipad,2)^int(key,2),'b').zfill(len(message[0]))
         ko = format(int(opad,2)^int(key,2),'b').zfill(len(message[0]))
         inp = deepcopy(message)

@@ -42,7 +42,7 @@ class CCA:
     def decrypt(self, cipher, key):
         """
         Given a ciphertext and the key, generate the message which was encrypted. Also 
-        verify if the message and the tag match.
+        verify if the cipher and the tag match.
         """
         key_1, key_2 = key
         m = []
